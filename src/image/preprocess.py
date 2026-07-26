@@ -1,19 +1,25 @@
-import cv2
+from PIL import Image
+import torch
 import torchvision.transforms as transforms
+
 
 class ImagePreprocessor:
     def __init__(self):
         self.image = None
-        self.image_transform = transforms.Compose([
-            transforms.Resize((640, 640)),
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        self.transform = transforms.Compose([
+            transforms.Resize(640),
+            transforms.CenterCrop(640),
         ])
 
+        self.tensor = None
+
     def load_image(self, path):
-        self.image = cv2.imread(path, cv2.IMREAD_COLOR)
+        self.image = Image.open(path)
+        if self.image is None:
+            raise FileNotFoundError(f"Could not read image: {path}")
+        self.image = self.transform(self.image.convert("RGB"))
+        self.tensor = transforms.ToTensor()(self.image).float()
 
     def get_preprocessed_image(self):
-        img = self.image_transform(self.image)
-        img = img.unsqueeze(0)
-        return img
+        img = self.tensor
+        return img.unsqueeze(0)
