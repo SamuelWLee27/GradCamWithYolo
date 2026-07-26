@@ -4,3 +4,4 @@ torchvision
 torch
 cv2
 numpy
+Pillow

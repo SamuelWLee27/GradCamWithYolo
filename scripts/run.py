@@ -7,9 +7,9 @@ import cv2
 import numpy as np
 
 model_name = "yolov8n.pt"
-image_path = "../data/dog.jpeg"
-output_eigen_path = "../result/eigen_cam.jpg"
-output_grad_path = "../result/grad_cam.jpg"
+image_path = "data/dog.jpeg"
+output_eigen_path = "result/eigen_cam.jpg"
+output_grad_path = "result/grad_cam.jpg"
 DOG = 16
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
