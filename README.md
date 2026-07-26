@@ -1,4 +1,4 @@
-# Grad-CAM with YOLO
+# GradCAM with YOLO
 
 Visualize where a yolo detector "looks" when it makes a prediction. The script runs two class activation map methods on an image and saves the heatmaps:
 
